@@ -1,0 +1,40 @@
+<html>
+<head>
+	<script src="jquery-2.1.4.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="addannounce.css">
+	<link rel="stylesheet" type="text/css" href="UI-Form-master/form.min.css">
+	<script src="UI-Form-master/form.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="UI-Icon-master/icon.min.css">
+	<script src="UI-Progress-master/progress.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="UI-Progress-master/progress.min.css">
+	<link rel="stylesheet" type="text/css" href="UI-Loader-master/loader.min.css">
+	<script src="addannounce.js"></script>
+</head>
+<body>
+	<div id="currentpage">
+		<div id="currentpagedescription">新增公告</div>
+		<form class="ui form" action="addannounce.php" method="post">
+			<div class="field">
+				<label>標題</label>
+				<input type="text" name="title">
+			</div>
+			<div class="field">
+				<label>內容</label>
+				<textarea name="content"></textarea>
+			</div>
+			<div class="field">
+				<label onclick="document.querySelector('#fff').click()">檔案</label>
+				<div id="addfilebutton">
+					點此新增檔案
+				</div>
+			</div>
+			<div id="filelist">
+
+			</div>
+			<div id="submitbutton" class="active">
+				送出
+			</div>
+		</form>
+	</div>
+</body>
+</html>

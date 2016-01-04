@@ -1,0 +1,101 @@
+body{
+	background-color: #F4FFFF;
+    margin: 0;
+    font-family: Microsoft JhengHei;
+    padding:0px 0px 20px 0px;
+}
+#topmenu{
+	height: 60px;
+    width: 1000px;
+    margin: auto;
+    background-color: beige;
+    text-align: center;
+    line-height: 60px;
+}
+#downmenu{
+	height: 200px;
+    width: 1000px;
+    margin: auto;
+    background-color: antiquewhite;
+}
+#content{
+    width: 1000px;
+    margin: auto;
+    background-color: burlywood;
+}
+#wrapper{
+	border-radius: 10px 0px;
+    overflow: hidden;
+    width: 1000px;
+    margin: auto;
+    box-shadow: 0px 3px 2px 0px rgba(68,147,144,1);
+    background-color: #F5F5F5;
+}
+#topmenu img{
+	max-width: 100px;
+	max-height: 80%;
+	margin-top: 6px;
+	margin-left: 6px;
+	float:left;
+}
+.entrancebutton{
+	width:200px;
+	height:200px;
+	float:left;
+	position: relative;
+}
+.entrancebutton img{
+	width:200px;
+	height:200px;
+}
+.entrancebutton .entrance{
+	position:absolute;
+	line-height: 200px;
+	text-align: center;
+	width: 200px;
+	opacity: 0;
+	top:0;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    transition: background-color 0.7s;
+    transition: opacity 0.2s;
+}
+.entrancebutton .entrance:hover{
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.3);
+	opacity: 1;
+}
+#leftmenu{
+	float:left;
+	width:180px;
+}
+#rightmenu{
+	float:left;
+	width:820px;
+}
+.leftmenubutton{
+	text-align: center;
+	line-height: 50px;
+	background-color: #F5F5DC;
+	transition:background-color 0.3s;
+	display: block;
+}
+.leftmenubutton:hover{
+	cursor:pointer;
+	background-color: #E5E5BC;
+}
+a{
+	color: black;
+}
+a:link {
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+}

@@ -1,0 +1,81 @@
+#currentpagedescription{
+	text-align: center;
+	line-height: 60px;
+	background-color: white;
+	font-weight: bold;
+	background-color: #F5F5F5;
+}
+#currentpage{
+	text-align: center;
+	line-height: 30px;
+	background-color: white;
+}
+#announceformat{
+	display: flex;
+	line-height: 60px;
+}
+.announceitem{
+	display: flex;
+	line-height: 60px;
+}
+.announceitem .information{
+	flex:13;
+	display: flex;
+	background-color: white;
+    transition:background-color 0.3s;
+}
+.announceitem .edit{
+	flex:2;
+}
+.announceitem .information:hover{
+	background-color: #F5F5F5;
+	cursor: pointer;
+}
+.announcedatetime{
+	flex:6;
+}
+.announcetitle{
+	flex:7;
+}
+.editbutton{
+	flex:2;
+  	align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: white;
+    transition:background-color 0.3s;
+    height:60px;
+}
+.announceitem .editbutton:hover{
+	background-color: #F5F5F5;
+	cursor: pointer;
+}
+.editbutton img{
+	height: 30px;
+}
+.deletebutton{
+	flex:2;
+	align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: white;
+    transition:background-color 0.3s;
+}
+.announceitem .deletebutton:hover{
+	background-color: #F5F5F5;
+	cursor: pointer;
+}
+.deletebutton img{
+	height: 30px;
+}
+#addbutton{
+	background-color: #F0F0F0;
+	line-height: 60px;
+	transition:background-color 0.3s;
+	border-radius: 10px;
+	display: block;
+}
+#addbutton:hover{
+	background-color: #E0E0E0;
+	cursor: pointer;
+}

@@ -1,0 +1,45 @@
+#currentpagedescription{
+	text-align: center;
+	line-height: 60px;
+	background-color: white;
+	font-weight: bold;
+	background-color: #F5F5F5;
+}
+#filecontainer{
+	min-height:220px;
+	background-color: white;
+	padding:10px;
+}
+.fileitem{
+    width: 100px;
+    height: 150px;
+    display: block;
+    padding: 10px 10px 0px 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float:left;
+    transition:background-color 0.4s;
+}
+.fileitem:hover{
+	background-color:#b0b0b0;
+}
+.fileicon{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fileicon img{
+	max-width: 100px;
+    max-height: 100px;
+}
+.filename{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    font-weight: bold;
+    text-align: center;
+    word-break: break-all;
+}

@@ -1,0 +1,66 @@
+#currentpage{
+	text-align: center;
+	line-height: 30px;
+}
+#annouceformat{
+	display: flex;
+	line-height: 60px;
+}
+.announcedatetime{
+	flex:4;
+}
+.announcetitle{
+	flex:7;
+}
+#announcecontent{
+	background-color: white;
+	min-height: 130px;
+	padding:40px;
+	text-align: left;
+}
+#announcebackbutton{
+	background-color: #FAFAFA;
+	line-height: 50px;
+	transition:background-color 0.3s;
+}
+#announcebackbutton:hover{
+	cursor: pointer;
+	background-color: #E0E0E0;
+}
+#filelistwrapper{
+	background-color: white;
+}
+#filelist{
+	width: 100%;
+    background-color: white;
+    padding: 0px 40px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 18px;
+    line-height: 60px;
+}
+.fileitem{
+	line-height: 50px;
+    width: 740px;
+    margin: auto;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    transition:background-color 0.3s;
+}
+.fileitem:hover{
+	background-color: #D5D5D5;
+}
+.fileitem i{
+	margin-right: 10px;
+}
+.fileitem .pic{
+	display: block;
+	margin: auto;
+	max-height: 500px;
+	max-width: 80%;
+}
+.padd{
+	height: 1px;
+}

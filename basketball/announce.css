@@ -1,0 +1,35 @@
+#currentpagedescription{
+	text-align: center;
+	line-height: 60px;
+	background-color: white;
+	font-weight: bold;
+	background-color: #F5F5F5;
+}
+#currentpage{
+	text-align: center;
+	line-height: 30px;
+	background-color: white;
+}
+#annouceformat{
+	display: flex;
+	line-height: 40px;
+}
+.announcedate{
+	flex:4;
+}
+.announcetime{
+	flex:2;
+}
+.announcetitle{
+	flex:7;
+}
+.announceitem{
+	display: flex;
+	height:60px;
+	line-height: 60px;
+	transition:background-color 0.3s;
+}
+.announceitem:hover{
+	cursor:pointer;
+	background-color: #D4D4D4!important;
+}

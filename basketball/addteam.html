@@ -1,0 +1,47 @@
+<html>
+<head>
+	<script src="../jquery-2.1.4.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="addteam.css">
+	<link rel="stylesheet" type="text/css" href="../UI-Form-master/form.min.css">
+	<script src="../UI-Form-master/form.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../UI-Icon-master/icon.min.css">
+	<link rel="stylesheet" type="text/css" href="../UI-Loader-master/loader.min.css">
+	<link rel="stylesheet" type="text/css" href="../UI-Checkbox-master/checkbox.min.css">
+	<script src="../UI-Checkbox-master/checkbox.min.js"></script>
+	<script src="addteam.js"></script>
+</head>
+<body>
+	<div id="currentpage">
+		<div id="currentpagedescription">新增參賽隊伍</div>
+		<form class="ui form" action="addannounce.php" method="post">
+			<div class="field">
+				<label>項目</label>
+				<input type="text" name="ball" disabled="disabled"  value="籃球">
+			</div>
+			<div class="field">
+				<label>學校</label>
+				<input type="text" name="school" placeholder="報名隊伍就讀的學校">
+			</div>
+			<div class="field">
+				<label>科系</label>
+				<input type="text" name="department" placeholder="報名隊伍就讀的科系">
+			</div>
+			<div class="inline field">
+				<label>個人團體</label>
+				<div class="field">
+			      <div class="ui radio checkbox" style="margin:auto">
+			        <input type="radio" name="type" checked="checked">
+			        <label>團體賽</label>
+			      </div>
+			    </div>
+			</div>
+			<div id="submitbutton" class="active">
+				送出
+			</div>
+		</form>
+	</div>
+	<div id="dialog" title="提示">
+  		<p>必須上傳檔案才可以製作投影片</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+#currentpagedescription{
+	text-align: center;
+	line-height: 60px;
+	background-color: white;
+	font-weight: bold;
+	background-color: #F5F5F5;
+}
+#currentpage{
+	text-align: center;
+	line-height: 30px;
+	background-color: white;
+}
+.form{
+	padding:20px 20px 20px 0px;
+}
+.form .field{
+	display: flex;
+}
+.form .field label{
+	flex:1;
+	margin:0!important;
+	line-height: 45px!important;
+	font-size: 18px!important;
+}
+.form .field input{
+	flex:6;
+}
+.form .field textarea{
+	flex:6;
+}
+.inline.field .field{
+	flex:6;
+}
+#addfilebutton{
+	flex:6;
+	line-height: 45px;
+	font-size:18px;
+	border-radius: 10px;
+	background-color: #F5F5F5; 
+	transition:background-color 0.5s;
+}
+#addfilebutton:hover{
+	cursor: pointer;
+	background-color: #E2E2E2; 
+}
+#addfilebutton img{
+	display: none;
+	max-width: 100%;
+	max-height: 200px;
+	margin: auto;
+	margin-bottom: 20px;
+}
+#addfilebutton input{
+	display:none;
+}
+#submitbutton{
+	line-height: 45px;
+	font-size:18px;
+	border-radius: 10px;
+	background-color: #F5F5F5; 
+	transition:background-color 0.5s;
+	width: 30%;
+    margin-left: 20px;
+    margin: auto;
+    margin-top: -2px;
+}
+#submitbutton.active:hover{
+	cursor: pointer;
+	background-color: #E2E2E2; 
+}
+.fileitem{
+	display: flex;
+	line-height: 40px;
+	margin: 0 0 1em;
+}
+.fileitem input{
+	display: none;
+}
+.fileitem .filetype{
+	flex:1;
+    line-height: 40px;
+    font-size: 20px;
+}
+.fileitem .filename{
+	flex:4;
+    line-height: 40px;
+}
+.fileitem .deletebutton{
+	flex:1;
+	background-color: #F5F5F5; 
+	transition:background-color 0.5s;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.fileitem .deletebutton:hover{
+	cursor: pointer;
+	background-color: #E2E2E2; 
+}
+.fileitem .deletebackendbutton{
+	flex:1;
+	background-color: #F5F5F5; 
+	transition:background-color 0.5s;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.fileitem .deletebackendbutton:hover{
+	cursor: pointer;
+	background-color: #E2E2E2; 
+}
+.fileitem .deletebutton img{
+	max-height: 20px;
+}
+.fileitem .deletebackendbutton img{
+	max-height: 20px;
+}
+.progress{
+	margin-left: 40px!important;
+	margin-bottom: 40px!important;
+}
+#dialog{
+	display: none;
+}
+.ui.radio.checkbox label:before{
+	width: 20px !important;
+    height: 20px!important;
+    top: 11px!important;
+    left: -2px!important;
+}
+.ui.radio.checkbox label:after{
+	width: 24px !important;
+    height: 24px!important;
+    top: 10px!important;
+    left: -3px!important;
+}
