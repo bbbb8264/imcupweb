@@ -6,7 +6,7 @@
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
-	} 
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,7 +55,7 @@
 		</div>
 	</div>
 	<div id="downmenu">
-		
+
 	<div id="content">
 		<div id="leftmenu">
 			<a class="leftmenubutton" href="index.php?current=announce">
@@ -73,7 +73,7 @@
 			<a class="leftmenubutton" href="index.php?current=addteam">
 				新增參賽隊伍
 			</a>
-			<a class="leftmenubutton">
+			<a class="leftmenubutton" href="index.php?current=schedule">
 				賽程
 			</a>
 			<a class="leftmenubutton" href="index.php?current=addslider">
@@ -92,6 +92,8 @@
 						include 'editannounce.php';
 					}else if($_GET['current'] == "addannounce"){
 						include 'addannounce.html';
+					}else if($_GET['current'] == "schedule"){
+						include 'schedule.html';
 					}else if($_GET['current'] == "editslider"){
 						include 'editslider.php';
 					}else if($_GET['current'] == "addslider"){
