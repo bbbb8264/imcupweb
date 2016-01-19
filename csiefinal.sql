@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- 資料表結構 `administrator`
 --
-
+DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE `administrator` (
   `username` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `administrator` (
 --
 -- 資料表結構 `basketballschedule`
 --
-
+DROP TABLE IF EXISTS `basketballschedule`;
 CREATE TABLE `basketballschedule` (
   `cycle` varchar(1) NOT NULL,
   `No` varchar(5) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `basketballschedule` (
 --
 -- 資料表結構 `basketballsliderlink`
 --
-
+DROP TABLE IF EXISTS `basketballsliderlink`;
 CREATE TABLE `basketballsliderlink` (
   `id` mediumint(9) NOT NULL,
   `filename` char(64) NOT NULL,
@@ -66,7 +66,6 @@ CREATE TABLE `basketballsliderlink` (
 --
 -- 資料表的匯出資料 `basketballsliderlink`
 --
-
 INSERT INTO `basketballsliderlink` (`id`, `filename`, `filetype`, `target`, `title`, `queue`, `uploadtime`) VALUES
 (1, 'hahaha', 'jpg', 'http://www.google.com', 'YEE~', 3, '2015-12-29 20:51:04'),
 (2, 'hahaha', 'jpg', 'http://www.google.com', 'PikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPikaPika', 2, '2015-12-29 20:51:04'),
@@ -78,7 +77,7 @@ INSERT INTO `basketballsliderlink` (`id`, `filename`, `filetype`, `target`, `tit
 --
 -- 資料表結構 `basketballteam`
 --
-
+DROP TABLE IF EXISTS `basketballteam`;
 CREATE TABLE `basketballteam` (
   `id` mediumint(9) NOT NULL,
   `school` char(128) NOT NULL,
@@ -93,17 +92,27 @@ CREATE TABLE `basketballteam` (
 --
 -- 資料表的匯出資料 `basketballteam`
 --
-
 INSERT INTO `basketballteam` (`id`, `school`, `department`, `nickName`, `leader`, `type`, `publishtime`, `lastrevisetime`) VALUES
 (1, '國立成功大學', '工業與資訊管理學系', '成大工資管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
-(2, '國立台灣大學', '工商管理學系', '台大工管', NULL, 1, '2016-01-17 14:14:41', '2016-01-17 14:14:41');
+(2, '國立台灣大學', '工商管理學系', '台大工管', NULL, 1, '2016-01-17 14:14:41', '2016-01-17 14:14:41'),
+(3, '國立屏東大學', '工商管理學系', '屏東工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(4, '國立高雄大學', '工商管理學系', '高雄工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(5, '國立宜蘭大學', '工商管理學系', '宜蘭工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(6, '國立東華大學', '工商管理學系', '東華工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(7, '國立東海大學', '工商管理學系', '東海工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(8, '國立中原大學', '工商管理學系', '中原工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(9, '國立中央大學', '工商管理學系', '中央工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(10, '國立中興大學', '工商管理學系', '中興工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(11, '國立中山大學', '工商管理學系', '中山工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(12, '國立清華大學', '工商管理學系', '清華工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45'),
+(13, '國立交通大學', '工商管理學系', '交通工管', NULL, 1, '2016-01-17 13:58:45', '2016-01-17 13:58:45');
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `basketballteammember`
 --
-
+DROP TABLE IF EXISTS `basketballteammember`;
 CREATE TABLE `basketballteammember` (
   `id` mediumint(9) NOT NULL,
   `number` char(32) NOT NULL,
@@ -119,7 +128,7 @@ CREATE TABLE `basketballteammember` (
 --
 -- 資料表結構 `mainannounce`
 --
-
+DROP TABLE IF EXISTS `mainannounce`;
 CREATE TABLE `mainannounce` (
   `id` mediumint(9) NOT NULL,
   `title` char(128) NOT NULL,
@@ -131,7 +140,6 @@ CREATE TABLE `mainannounce` (
 --
 -- 資料表的匯出資料 `mainannounce`
 --
-
 INSERT INTO `mainannounce` (`id`, `title`, `content`, `publishtime`, `lastrevisetime`) VALUES
 (1, '新增籃球競賽章程ㄇ', '新增籃球競賽章程', '2015-12-04 20:30:10', '2015-12-20 08:30:54'),
 (2, '新增排球競賽章程', '新增排球競賽章程', '2015-12-04 20:30:34', '2015-12-04 20:30:34'),

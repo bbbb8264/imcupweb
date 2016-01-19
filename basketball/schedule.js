@@ -1,139 +1,281 @@
 var stage = new Konva.Stage({
     container: "container",
     width: 820,
-    height: 500
+    height: 420,
 });
 var layer = new Konva.Layer();
-
-var text = new Konva.Text({
-    x: stage.getWidth() / 2 - 100,
-    y: 20,
-    text: "賽程編輯系統",
-    fontSize: 25,
-    fontFamily: "Calibri",
-    fill: "blue"
+var activelayer = new Konva.Layer();
+var SchedulePlace = new Konva.Circle({
+    x: 410, y: 120,
+    radius:75,
+    stroke: "black",
 });
+SchedulePlace.isSchedule = true;
+var cycleName = new Konva.Text({
+    x: 335, y:110,
+    width:150,
+    align:"center",
+    text: "將賽程拖曳至此",
+    fontSize: 20,
+    fontFamily: "Microsoft JhengHei",
+    fill: "black",
+});
+layer.add(cycleName);
+layer.add(SchedulePlace);
 var cycleDragArea = new Konva.Rect({
-    x: 10, y: 70,
-    width: 140, height: 420,
+    x: 10, y: 10,
+    width: 140, height: 260,
     stroke: "red",
 });
-
 var triangleDrag = new Konva.Line({
-    points: [80, 100, 120, 170, 40, 170],
-    fill: "blue",
+    points: [80, 40, 120, 110, 40, 110],
     stroke: "black",
+    fill: "white",
     strokeWidth: 3,
     closed: true,
     draggable: true,
 });
-
 var rectDrag = new Konva.Rect({
     x: 40,
-    y: 220,
+    y: 160,
     width: 80,
     height: 80,
-    fill: "blue",
+    fill: "white",
     stroke: "black",
     strokeWidth: 3,
     draggable: true
 });
-
+var schedulelist = [];
 triangleDrag.on('dragstart', function() {
     triangleDrag.stopDrag();
-
+    this.setX(0);
+    this.setY(0);
     var newTriangle = triangleDrag.clone({
         x: 0,
         y: 0
     });
     newTriangle.off('dragstart');
-    layer.add(newTriangle);
-    newTriangle.startDrag();
-});
-
-triangleDrag.on('dragend', function() {
-    var pos = stage.getPointerPosition();
-    if (pos.y > 100 && pos.y < 160)
-        i = "1";
-    else if (pos.y > 250 && pos.y < 310)
-        i = "2";
-    else if (pos.y > 400 && pos.y < 460)
-        i = "3";
-    else
-        i = "0";
-    if (pos.x > 220 && pos.x < 280)
-        j = "1";
-    else if (pos.x > 370 && pos.x < 430)
-        j = "2";
-    else if (pos.x > 520 && pos.x < 580)
-        j = "3";
-    else if (pos.x > 670 && pos.x < 730)
-        j = "4";
-    else
-        j = "0";
-    if (i != "0" && j != "0") {     //place onto some cycle
-        switch (i+j) {
-            case "11":  break;
-            case "12": break;
-            case "13": break;
-            case "14": break;
-            case "21": break;
-            case "22": break;
-            case "23": break;
-            case "24": break;
-            case "31": break;
-            case "32": break;
-            case "33": break;
-            case "34": break;
+    newTriangle.off('dragend');
+    newTriangle.on('dragend', function() {
+        var pos = stage.getPointerPosition();
+        var shape = layer.getIntersection(pos);
+        if(shape != null && shape.isSchedule){
+            this.setX(shape.attrs.x - 80);
+            this.setY(shape.attrs.y - 80);
+            this.draggable(false);
+            cycleName.setY(shape.attrs.y + 190);
+            schedulelist.push(this);
+            shape.setY(shape.attrs.y + 200);
+            shape.attrs.stroke = "black";
+            this.moveTo(layer);
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x+29,
+                y: this.attrs.y-20,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            layer.add(teamplace);
+            this.team1 = teamplace;
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x-80,
+                y: this.attrs.y+120,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            this.team2 = teamplace;
+            layer.add(teamplace);
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x+140,
+                y: this.attrs.y+120,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            this.team3 = teamplace;
+            console.log(this);
+            layer.add(teamplace);
+            if(schedulelist.length > 1){
+                if(stage.height() < (schedulelist.length+1)*210){
+                    stage.height((schedulelist.length+1)*210);
+                }
+            }
+            stage.draw();
+        }else{
+            $(this)[0].remove();
+            stage.draw();
         }
-    }
+    });
+    var preshape;
+    newTriangle.on('dragmove',function(e){
+        var pos = stage.getPointerPosition();
+        var shape = layer.getIntersection(pos);
+        if (preshape && shape) {
+                if (preshape !== shape) {
+                    preshape = shape;
+                } else {
+                }
+            } else if (!preshape && shape) {
+                preshape = shape;
+                if(shape.isSchedule){
+                    shape.attrs.stroke = "blue";
+                    layer.draw();
+                }
+            } else if (preshape && !shape) {
+                if(preshape.isSchedule){
+                    preshape.attrs.stroke = "black";
+                    layer.draw();
+                }
+                preshape = undefined;
+            }
+    });
+    activelayer.add(newTriangle);
+    newTriangle.startDrag();
+    this.setX(0);
+    this.setY(0);
 });
-
+triangleDrag.on('dragend',function(){
+    this.setX(0);
+    this.setY(0);
+});
 rectDrag.on('dragstart', function() {
     rectDrag.stopDrag();
-
+    this.setX(40);
+    this.setY(160);
     var newRect = rectDrag.clone({
         x: 40,
-        y: 220
+        y: 160
     });
     newRect.off('dragstart');
-    layer.add(newRect);
+    newRect.off('dragend');
+    newRect.on('dragend', function() {
+        var pos = stage.getPointerPosition();
+        var shape = layer.getIntersection(pos);
+        if(shape != null && shape.isSchedule){
+            this.setX(shape.attrs.x - 40);
+            this.setY(shape.attrs.y - 40);
+            this.draggable(false);
+            cycleName.setY(shape.attrs.y + 190);
+            schedulelist.push(this);
+            shape.setY(shape.attrs.y + 200);
+            shape.attrs.stroke = "black";
+            this.moveTo(layer);
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x-90,
+                y: this.attrs.y-50,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            layer.add(teamplace);
+            this.team1 = teamplace;
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x+70,
+                y: this.attrs.y-50,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            this.team2 = teamplace;
+            layer.add(teamplace);
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x+70,
+                y: this.attrs.y+90,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            this.team3 = teamplace;
+            layer.add(teamplace);
+            var teamplace = new Konva.Rect({
+                x: this.attrs.x-90,
+                y: this.attrs.y+90,
+                width: 100,
+                height: 40,
+                stroke: "black",
+                strokeWidth: 3,
+                dash: [10]
+            });
+            teamplace.isTeamplace = true;
+            teamplace.hasteam = false;
+            this.team4 = teamplace;
+            layer.add(teamplace);
+            if(schedulelist.length > 1){
+                if(stage.height() < (schedulelist.length+1)*210){
+                    stage.height((schedulelist.length+1)*210);
+                }
+            }
+            stage.draw();
+        }else{
+            $(this)[0].remove();
+            stage.draw();
+        }
+    });
+    var preshape;
+    newRect.on('dragmove',function(e){
+        var pos = stage.getPointerPosition();
+        var shape = layer.getIntersection(pos);
+        if (preshape && shape) {
+                if (preshape !== shape) {
+                    preshape = shape;
+                } else {
+                }
+            } else if (!preshape && shape) {
+                preshape = shape;
+                if(shape.isSchedule){
+                    shape.attrs.stroke = "blue";
+                    layer.draw();
+                }
+            } else if (preshape && !shape) {
+                if(preshape.isSchedule){
+                    preshape.attrs.stroke = "black";
+                    layer.draw();
+                }
+                preshape = undefined;
+            }
+    });
+    activelayer.add(newRect);
     newRect.startDrag();
+    this.setX(40);
+    this.setY(160);
 });
-
-var CyclePlaceList = [];
-var cycleLabel = 'A';
-for (i=0;i<3;i++) {
-    for (j=0;j<4;j++) {
-        var cyclePlace = new Konva.Circle({
-            x: 250 + j*150, y: 130 + i*150,
-            radius: 20,
-            stroke: "black",
-            dash: [10, 10]
-        });
-        layer.add(cyclePlace);
-        CyclePlaceList.push(cyclePlace);
-        var cycleNo = new Konva.Text({
-            x: 245 + j*150, y: 123 + i*150,
-            text: cycleLabel,
-            fontSize: 20,
-            fontFamily: "Calibri",
-            fill: "blue"
-        });
-        layer.add(cycleNo);
-        cycleLabel = String.fromCharCode(cycleLabel.charCodeAt(0) + 1);
-    }
-}
-
-
+rectDrag.on('dragend',function(){
+    this.setX(40);
+    this.setY(160);
+});
 function pointerOn() { document.body.style.cursor = "pointer" };
-function pointerOff() { document.body,style.cursor = "default" };
+function pointerOff() { document.body.style.cursor = "default" };
 layer.add(cycleDragArea);
 layer.add(triangleDrag);
 layer.add(rectDrag);
-layer.add(text);
-stage.add(layer);
 
+stage.add(layer);
+stage.add(activelayer);
 var XHR = new XMLHttpRequest();
 sendRequest("getSchedule.php");
 
@@ -163,9 +305,107 @@ XHR.onreadystatechange = function() {
 
 function getScheduleResult(result) {
     if (result["result"] == "empty") {
-        alert("哭哭喔!");
+        //alert("哭哭喔!");
     }
     else if (result["result"] == "success") {
 
     }
 }
+var teamDragArea = new Konva.Rect({
+    x: 670, y: 10,
+    width: 140, height: 100,
+    stroke: "red",
+});
+layer.add(teamDragArea);
+var undistributedteam = [];
+function sortteam(){
+    if(stage.height() < undistributedteam.length*60+30){
+        stage.height(undistributedteam.length*60+30);
+    }
+    $(undistributedteam).each(function(k,v){
+        v.setY(20+k*60);
+        v.setX(680);
+        teamDragArea.height(60*undistributedteam.length+10);
+    });
+}
+$.ajax({
+    url : "getTeam.php",
+    type : "POST",
+    data : {},
+    success : function(data) {
+        data = jQuery.parseJSON(data);
+        teamDragArea.height(60*data.length+10);
+        stage.height(data.length*60+30);
+        $(data).each(function(k,v){
+            var teamdrag = new Konva.Rect({
+                width: 120, height: 50,
+                fill: "white",
+                stroke: "black",
+            });
+            var teamgroup = new Konva.Group({
+                x: 680, y: 20+k*60,
+                draggable: true
+            });
+            var teamname = new Konva.Text({
+                y:15,
+                text: v.nickName,
+                width: 120, height: 50,
+                fontSize: 20,
+                fontFamily: "Microsoft JhengHei",
+                fill: "black",
+                align:"center",
+            });
+            var preshape;
+            teamgroup.on('dragmove',function(e){
+            var pos = stage.getPointerPosition();
+            var shape = layer.getIntersection(pos);
+                if (preshape && shape) {
+                        if (preshape !== shape) {
+                            preshape = shape;
+                        } else {
+                        }
+                    } else if (!preshape && shape) {
+                        preshape = shape;
+                        if(shape.isTeamplace){
+                            shape.attrs.stroke = "blue";
+                            layer.draw();
+                        }
+                    } else if (preshape && !shape) {
+                        if(preshape.isTeamplace){
+                            preshape.attrs.stroke = "black";
+                            layer.draw();
+                        }
+                        preshape = undefined;
+                    }
+            });
+            teamgroup.on("dragstart",function(){
+                this.moveTo(activelayer);
+                stage.draw();
+            });
+            teamgroup.on("dragend",function(){
+                this.moveTo(layer);
+                var pos = stage.getPointerPosition();
+                var shape = layer.getIntersection(pos);
+                console.log(undistributedteam);
+                if(shape != null && shape.isTeamplace && !shape.hasteam){
+                    undistributedteam.splice(undistributedteam.indexOf(this),1);
+                    shape.team = this;
+                    this.draggable(false);
+                    this.setX(shape.attrs.x-9);
+                    this.setY(shape.attrs.y-5);
+                    console.log(undistributedteam);
+                }
+                sortteam();
+                stage.draw();
+            });
+            teamgroup.add(teamdrag);
+            teamgroup.add(teamname);
+            undistributedteam.push(teamgroup);
+            layer.add(teamgroup);
+        });
+        stage.draw();
+    },
+    error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText);
+    } 
+});
