@@ -3,6 +3,8 @@ var stage = new Konva.Stage({
     width: 820,
     height: 420,
 });
+var height1 = 420;
+var height2;
 var layer = new Konva.Layer();
 var activelayer = new Konva.Layer();
 var SchedulePlace = new Konva.Circle({
@@ -60,6 +62,7 @@ triangleDrag.on('dragstart', function() {
         var pos = stage.getPointerPosition();
         var shape = layer.getIntersection(pos);
         if(shape != null && shape.isSchedule){
+            newTriangle.off('mouseenter');
             this.setX(shape.attrs.x - 80);
             this.setY(shape.attrs.y - 80);
             this.draggable(false);
@@ -106,9 +109,9 @@ triangleDrag.on('dragstart', function() {
             teamplace.isTeamplace = true;
             teamplace.hasteam = false;
             this.team3 = teamplace;
-            console.log(this);
             layer.add(teamplace);
             if(schedulelist.length > 1){
+                height1 = (schedulelist.length+1)*210;
                 if(stage.height() < (schedulelist.length+1)*210){
                     stage.height((schedulelist.length+1)*210);
                 }
@@ -151,6 +154,10 @@ triangleDrag.on('dragend',function(){
     this.setX(0);
     this.setY(0);
 });
+triangleDrag.on('mouseenter',pointerOn);
+triangleDrag.on('mouseleave',pointerOff);
+rectDrag.on('mouseenter',pointerOn);
+rectDrag.on('mouseleave',pointerOff);
 rectDrag.on('dragstart', function() {
     rectDrag.stopDrag();
     this.setX(40);
@@ -165,6 +172,7 @@ rectDrag.on('dragstart', function() {
         var pos = stage.getPointerPosition();
         var shape = layer.getIntersection(pos);
         if(shape != null && shape.isSchedule){
+            newRect.off('mouseenter');
             this.setX(shape.attrs.x - 40);
             this.setY(shape.attrs.y - 40);
             this.draggable(false);
@@ -226,6 +234,7 @@ rectDrag.on('dragstart', function() {
             this.team4 = teamplace;
             layer.add(teamplace);
             if(schedulelist.length > 1){
+                height1 = (schedulelist.length+1)*210;
                 if(stage.height() < (schedulelist.length+1)*210){
                     stage.height((schedulelist.length+1)*210);
                 }
@@ -319,7 +328,8 @@ var teamDragArea = new Konva.Rect({
 layer.add(teamDragArea);
 var undistributedteam = [];
 function sortteam(){
-    if(stage.height() < undistributedteam.length*60+30){
+    height2 = undistributedteam.length*60+30;
+    if(height1 < undistributedteam.length*60+30){
         stage.height(undistributedteam.length*60+30);
     }
     $(undistributedteam).each(function(k,v){
@@ -335,7 +345,11 @@ $.ajax({
     success : function(data) {
         data = jQuery.parseJSON(data);
         teamDragArea.height(60*data.length+10);
-        stage.height(data.length*60+30);
+        height2 = data.length*60+30;
+        if(data.length*60+30 > 420){
+            stage.height(data.length*60+30);
+        }
+        height2 = data.length*60+30;
         $(data).each(function(k,v){
             var teamdrag = new Konva.Rect({
                 width: 120, height: 50,
@@ -380,20 +394,25 @@ $.ajax({
             });
             teamgroup.on("dragstart",function(){
                 this.moveTo(activelayer);
+                if(this.par != null){
+                    this.par.hasteam = false;
+                    undistributedteam.push(this);
+                    this.par = null;
+                }
                 stage.draw();
             });
+            teamgroup.on('mouseenter',pointerOn);
+            teamgroup.on('mouseleave',pointerOff);
             teamgroup.on("dragend",function(){
                 this.moveTo(layer);
                 var pos = stage.getPointerPosition();
                 var shape = layer.getIntersection(pos);
-                console.log(undistributedteam);
                 if(shape != null && shape.isTeamplace && !shape.hasteam){
                     undistributedteam.splice(undistributedteam.indexOf(this),1);
                     shape.team = this;
-                    this.draggable(false);
                     this.setX(shape.attrs.x-9);
                     this.setY(shape.attrs.y-5);
-                    console.log(undistributedteam);
+                    this.par = shape;
                 }
                 sortteam();
                 stage.draw();
@@ -408,4 +427,9 @@ $.ajax({
     error : function(xhr,errmsg,err) {
         console.log(xhr.status + ": " + xhr.responseText);
     } 
+});
+$(document).ready(function(){
+    $("#submitbutton").click(function(){
+        $(this).addClass("loading");
+    });
 });

@@ -40,12 +40,32 @@ CREATE TABLE `administrator` (
 --
 DROP TABLE IF EXISTS `basketballschedule`;
 CREATE TABLE `basketballschedule` (
-  `cycle` varchar(1) NOT NULL,
+  `type` varchar(1) NOT NULL,
   `No` varchar(5) NOT NULL,
-  `teamA` varchar(20) NOT NULL,
-  `teamB` varchar(20) NOT NULL,
-  `time` datetime NOT NULL
+  `name` varchar(20) NOT NULL,
+  `teamnumber` int(5) NOT NULL,
+  `cyclenum` int(5) not null,
+  `time` datetime NOT NULL,
+  PRIMARY key(No)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `basketballschedule`
+--
+
+DROP TABLE IF EXISTS `basketballscheduletocycle`;
+CREATE TABLE `basketballschedule` (
+  `type` varchar(1) NOT NULL,
+  `No` varchar(5) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `teamnumber` int(5) NOT NULL,
+  `cyclenum` int(5) not null,
+  `time` datetime NOT NULL,
+  PRIMARY key(No)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
@@ -54,7 +74,7 @@ CREATE TABLE `basketballschedule` (
 --
 DROP TABLE IF EXISTS `basketballsliderlink`;
 CREATE TABLE `basketballsliderlink` (
-  `id` mediumint(9) NOT NULL,
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `filename` char(64) NOT NULL,
   `filetype` char(8) NOT NULL,
   `target` char(128) DEFAULT NULL,

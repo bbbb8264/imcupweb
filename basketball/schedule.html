@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="konva.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../UI-Button-master/button.min.css">
     <style>
     #currentpagedescription{
 		text-align: center;
@@ -14,11 +15,27 @@
 	#container{
 		background-color: white;
 	}
+	#submitbuttonwrapper{
+		background-color: white;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.ui.loading.button:before{
+		top:44%!important;
+		left:47%!important;
+	}
+	.ui.loading.button:after{
+		top:44%!important;
+		left:47%!important;
+	}
     </style>
 </head>
 <body>
 	<div id="currentpagedescription">新增參賽隊伍</div>
     <div id="container"></div>
-    <script type="text/javascript" src="schedule.js"></script>
+    <div id="submitbuttonwrapper">
+    	<div id="submitbutton" class="ui button" style="margin:auto;display:block;width:100px;">送出</div>
+	</div>
+	<script type="text/javascript" src="schedule.js"></script>
 </body>
 </html>
